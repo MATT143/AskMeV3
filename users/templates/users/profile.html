@@ -1,0 +1,39 @@
+{% extends "users/base.html"%}
+{% block content %}
+
+{% if user.profile.user_role == 'Approver'%}
+{% for query in data %}
+{% if query.status == 'SOLVED' %}
+<article class="media content-section">
+    <div class="media-body">
+
+        <div class="article-metadata">
+
+            <small class="text-muted">{{ query.creation_date|date:"F d, Y" }}</small>
+
+        </div>
+        <h2><a class="article-title" href="{% url 'post-detail' query.id %}">{{ query.title }}</a></h2>
+        <p class="article-content">{{ query.status }}</p>
+    </div>
+</article>
+{% endif %}
+{% endfor %}
+
+{% elif user.profile.user_role == 'Consultant'%}
+{% for query in data %}
+<article class="media content-section">
+    <div class="media-body">
+
+        <div class="article-metadata">
+
+            <small class="text-muted">{{ query.creation_date|date:"F d, Y" }}</small>
+
+        </div>
+        <h2><a class="article-title" href="{% url 'post-detail' query.id %}">{{ query.title }}</a></h2>
+        <p class="article-content">{{ query.status }}</p>
+    </div>
+</article>
+{% endfor %}
+{% endif %}
+
+{% endblock content%}
