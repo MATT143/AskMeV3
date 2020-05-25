@@ -12,6 +12,9 @@ from task.models import MasterTasks
 def home(request):
     return render(request,'users/home.html')
 
+def mainHome(request):
+    return render(request,'users/mainhome.html')
+
 def register(request):
     if request.method=='POST':
         form=UserRegistrationForm(request.POST)
